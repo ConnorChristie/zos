@@ -11,9 +11,9 @@ export default class ProjectCompiler {
     this.options = options
   }
 
-  call() {
+  async call() {
     this._loadSoliditySourcesFromDir(this.inputDir)
-    this._compile()
+    await this._compile()
   }
 
   _loadSoliditySourcesFromDir(dir) {
@@ -21,17 +21,17 @@ export default class ProjectCompiler {
       const filePath = path.resolve(dir, fileName)
       if (fs.isDir(filePath)) this._loadSoliditySourcesFromDir(filePath)
       else if (this._isSolidityFile(filePath)) {
-        const source = "".concat(fs.read(filePath))
+        const source = fs.read(filePath, 'utf-8')
         const contract = { fileName, filePath, source }
         this.contracts.push(contract)
       }
     })
   }
 
-  _compile() {
+  async _compile() {
     const solidityCompiler = new SolidityCompiler(this.contracts, this.options)
-    this.compilerOutput = solidityCompiler.call()
-    if (!fs.exists(this.outputDir)) fs.createDir(this.outputDir)
+    this.compilerOutput = await solidityCompiler.call()
+    if (!fs.exists(this.outputDir)) fs.createDirPath(process.cwd(), this.outputDir)
     this.compilerOutput.forEach(data => {
       const buildFileName = `${this.outputDir}/${data.contractName}.json`
       fs.writeJson(buildFileName, data)

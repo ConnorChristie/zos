@@ -23,5 +23,10 @@ module.exports = {
       network_id: '4',
       gasPrice: 1e9
     }
+  },
+  compilers: {
+    solc: {
+      version: '0.4.24'
+    }
   }
-};
+}

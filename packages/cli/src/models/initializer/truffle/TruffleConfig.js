@@ -20,6 +20,12 @@ const TruffleConfig = {
     return config.contracts_build_directory
   },
 
+  solcSettings() {
+    const config = this.init()
+    const compilerSettings = config.compilers || {}
+    return compilerSettings.solc
+  },
+
   loadProviderAndDefaults(network) {
     const config = this.init()
     const { networks: networkList } = config

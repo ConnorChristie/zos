@@ -1,8 +1,8 @@
 import fs from 'fs'
 import path from 'path'
 
-export function read(filename) {
-  return fs.readFileSync(filename)
+export function read(filename, encoding = undefined) {
+  return encoding ? fs.readFileSync(filename, encoding) : fs.readFileSync(filename)
 }
 
 export function readDir(dir) {
@@ -15,6 +15,15 @@ export function exists(filename) {
 
 export function createDir(dir) {
   fs.mkdirSync(dir)
+}
+
+export function createDirPath(baseDir, dirPath) {
+  const folders = dirPath.replace(baseDir, '').split('/')
+  folders.reduce((subDir, folder) => {
+    const subFolderPath = path.resolve(subDir, folder)
+    if (folder && !exists(subFolderPath)) fs.mkdirSync(subFolderPath)
+    return subFolderPath
+  }, '')
 }
 
 export function isDir(path) {
@@ -94,6 +103,7 @@ export default {
   ifNotExistsThrow,
   parseJson,
   createDir,
+  createDirPath,
   editJson,
   parseJsonIfExists,
   writeJson,

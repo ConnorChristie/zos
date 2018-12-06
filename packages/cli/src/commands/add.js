@@ -3,7 +3,7 @@
 import push from './push'
 import add from '../scripts/add'
 import addAll from '../scripts/add-all'
-import compile from '../models/compiler/compile'
+import Compiler from '../models/compiler/Compiler'
 import Initializer from '../models/initializer/Initializer'
 
 const name = 'add'
@@ -20,7 +20,7 @@ const register = program => program
 
 async function action(contractNames, options) {
   Initializer.initStaticConfiguration()
-  if(!options.skipCompile) await compile()
+  if(!options.skipCompile) await Compiler.call()
   if(options.all) addAll({})
   else {
     const contractsData = contractNames.map(rawData => {

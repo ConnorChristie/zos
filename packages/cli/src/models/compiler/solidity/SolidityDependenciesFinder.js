@@ -30,7 +30,7 @@ export default {
   },
 
   _buildContract(filePath, fileName) {
-    const source = "".concat(fs.read(filePath))
+    const source = fs.read(filePath, 'utf-8')
     return { fileName, filePath, source }
   },
 

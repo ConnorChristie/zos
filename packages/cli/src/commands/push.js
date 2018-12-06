@@ -2,7 +2,7 @@
 
 import _ from 'lodash'
 import push from '../scripts/push'
-import compile from '../models/compiler/compile'
+import Compiler from '../models/compiler/Compiler'
 import Initializer from '../models/initializer/Initializer'
 
 const name = 'push'
@@ -23,7 +23,7 @@ const register = program => program
 async function action(options) {
   const {  deployDependencies, force, reset: reupload } = options
   const { network, txParams } = await Initializer.initNetworkConfiguration(options)
-  if (!options.skipCompile) await compile()
+  if (!options.skipCompile) await Compiler.call()
   await push({ force, deployDependencies, reupload, network, txParams })
   if (!options.dontExitProcess && process.env.NODE_ENV !== 'test') process.exit(0)
 }
