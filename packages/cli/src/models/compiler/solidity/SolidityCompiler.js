@@ -45,10 +45,16 @@ export default class SolidityCompiler {
     const requestedSolc = await this.solc()
     const output = requestedSolc.compile(JSON.stringify(input), dep => this._findDependency(dep, this))
     const parsedOutput = JSON.parse(output)
-    const errors = parsedOutput.errors || []
-    if (errors.length === 0) return parsedOutput
-    const messages = parsedOutput.errors.map(error => error.message).join('\n')
-    throw Error(`Could not compile contracts: \n${messages}`)
+    const outputErrors = parsedOutput.errors || []
+    if (outputErrors.length === 0) return parsedOutput
+
+    const errors = outputErrors.filter(finding => finding.severity !== 'warning')
+    const warnings = outputErrors.filter(finding => finding.severity === 'warning')
+    const errorMessages = errors.map(error => error.formattedMessage).join('\n')
+    const warningMessages = warnings.map(warning => warning.formattedMessage).join('\n')
+
+    if (warnings.length > 0) log.warn(`Compilation warnings: \n${warningMessages}`)
+    if (errors.length > 0) throw Error(`Compilation errors: \n${errorMessages}`)
   }
 
   _buildSources() {
