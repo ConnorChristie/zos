@@ -31,7 +31,7 @@ async function action(contractFullNameOrAddress, newAdmin, options) {
   }
   
   const args = _.pickBy({ contractAlias, packageName, proxyAddress, newAdmin })
-  const { network, txParams } = await Initializer.call(options)
+  const { network, txParams } = await Initializer.initNetworkConfiguration(options)
   await setAdmin({ ...args, network, txParams })
   if (!options.dontExitProcess && process.env.NODE_ENV !== 'test') process.exit(0)
 }

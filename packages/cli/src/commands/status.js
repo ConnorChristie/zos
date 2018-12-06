@@ -19,7 +19,7 @@ const register = program => program
   .action(action)
 
 async function action(options) {
-  const { network, txParams } = await Initializer.call(options)
+  const { network, txParams } = await Initializer.initNetworkConfiguration(options)
 
   if (options.fix) await pull({ network, txParams })
   else if (options.fetch) await compare({ network, txParams })

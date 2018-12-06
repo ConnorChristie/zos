@@ -24,7 +24,7 @@ async function action(contractFullName, options) {
   const { force } = options
   const { initMethod, initArgs } = parseInit(options, 'initialize')
   const { contract: contractAlias, package: packageName } = fromContractFullName(contractFullName)
-  const { network, txParams } = await Initializer.call(options)
+  const { network, txParams } = await Initializer.initNetworkConfiguration(options)
   const args = _.pickBy({ packageName, contractAlias, initMethod, initArgs, force })
 
   await create({ ...args, network, txParams })

@@ -15,7 +15,12 @@ const TruffleConfig = {
     }
   },
 
-  load(network) {
+  buildDir() {
+    const config = this.init()
+    return config.contracts_build_directory
+  },
+
+  loadProviderAndDefaults(network) {
     const config = this.init()
     const { networks: networkList } = config
     if (!networkList[network]) throw Error(`Given network '${network}' is not defined in your truffle-config file`)
@@ -27,10 +32,9 @@ const TruffleConfig = {
     config.resolver = new TruffleResolver(config)
     const { provider, resolver } = this._setNonceTrackerIfNeeded(config)
 
-    const buildDir = config.contracts_build_directory
     const artifactDefaults = _.pickBy(_.pick(resolver.options, 'from', 'gas', 'gasPrice'))
     if (artifactDefaults.from) artifactDefaults.from = artifactDefaults.from.toLowerCase()
-    return { provider, buildDir, artifactDefaults }
+    return { provider, artifactDefaults }
   },
 
   // This function fixes a truffle issue related to HDWalletProvider that occurs when assigning

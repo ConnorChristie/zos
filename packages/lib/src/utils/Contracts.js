@@ -1,10 +1,10 @@
 import glob from 'glob'
 import path from 'path'
-import ZWeb3 from '../artifacts/ZWeb3'
 import ContractFactory from '../artifacts/ContractFactory'
 
 const DEFAULT_SYNC_TIMEOUT = 240000
 const DEFAULT_BUILD_DIR = `${process.cwd()}/build/contracts`
+const DEFAULT_CONTRACTS_DIR = `${process.cwd()}/contracts`
 
 // TODO: rename to Artifacts and move to /artifacts
 export default {
@@ -14,6 +14,10 @@ export default {
 
   getLocalBuildDir() {
     return this.buildDir || DEFAULT_BUILD_DIR
+  },
+
+  getLocalContractsDir() {
+    return this.contractsDir || DEFAULT_CONTRACTS_DIR
   },
 
   getArtifactsDefaults() {
@@ -54,6 +58,10 @@ export default {
 
   setLocalBuildDir(dir) {
     this.buildDir = dir
+  },
+
+  setLocalContractsDir(dir) {
+    this.contractsDir = dir
   },
 
   setArtifactsDefaults(defaults) {

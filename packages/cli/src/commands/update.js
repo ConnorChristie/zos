@@ -33,7 +33,7 @@ async function action(contractFullNameOrAddress, options) {
   }
   
   const args = _.pickBy({ contractAlias, packageName, proxyAddress, initMethod, initArgs, all, force })
-  const { network, txParams } = await Initializer.call(options)
+  const { network, txParams } = await Initializer.initNetworkConfiguration(options)
   await update({ ...args, network, txParams })
   if (!options.dontExitProcess && process.env.NODE_ENV !== 'test') process.exit(0)
 }

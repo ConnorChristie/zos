@@ -12,7 +12,7 @@ if (!network) log.error('Please specify a network using -network=<network>.')
 if (!from)    log.error('Please specify a sender address using -from=<addr>.')
 
 if (network && from) {
-  Initializer.call()
+  Initializer.initNetworkConfiguration()
     .then(({ network, txParams }) => deploy({ network, txParams }).then(console.log).catch(console.error))
     .catch(console.error)
 }

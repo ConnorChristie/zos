@@ -22,8 +22,8 @@ const register = program => program
 
 async function action(options) {
   const {  deployDependencies, force, reset: reupload } = options
+  const { network, txParams } = await Initializer.initNetworkConfiguration(options)
   if (!options.skipCompile) await compile()
-  const { network, txParams } = await Initializer.call(options)
   await push({ force, deployDependencies, reupload, network, txParams })
   if (!options.dontExitProcess && process.env.NODE_ENV !== 'test') process.exit(0)
 }

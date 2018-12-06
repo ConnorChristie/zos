@@ -15,7 +15,7 @@ async function deploy(options) {
 
 module.exports = function(deployer, network, accounts) {
   deployer.then(async () => {
-    const { network, txParams } = await Initializer.call({ network, from: accounts[1] })
+    const { network, txParams } = await Initializer.initNetworkConfiguration({ network, from: accounts[1] })
     await deploy({ network, txParams })
   })
 }
