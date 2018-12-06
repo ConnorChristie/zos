@@ -66,6 +66,7 @@ exports.stubCommands = function () {
     this.setAdmin = sinon.stub(setAdmin, 'default')
     this.errorHandler = sinon.stub(ErrorHandler.prototype, 'call').callsFake(() => null)
     this.initializer = sinon.stub(Initializer, 'initNetworkConfiguration').callsFake(function (options) {
+      Initializer.initStaticConfiguration()
       const { network, from } = Session.getOptions(options)
       const txParams = from ? { from } : {}
       return { network, txParams }

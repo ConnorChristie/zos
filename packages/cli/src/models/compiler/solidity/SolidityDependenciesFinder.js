@@ -3,6 +3,17 @@ import { FileSystem } from 'zos-lib'
 
 export default {
   call(dependencyPath) {
+    const nmDependency = this._tryNodeModulesDependency(dependencyPath)
+    return nmDependency || this._tryProjectDependency()
+  },
+
+  _tryNodeModulesDependency(dependencyPath) {
+    const fileName = this._getFileName(dependencyPath)
+    const filePath = path.resolve(process.cwd(), 'node_modules', dependencyPath)
+    if (FileSystem.exists(filePath)) return this._buildContract(filePath, fileName)
+  },
+
+  _tryProjectDependency(dependencyPath) {
     const rootDir = process.cwd()
     const dependencyName = this._getFileName(dependencyPath)
     const fileNames = FileSystem.readDir(rootDir)
@@ -30,7 +41,7 @@ export default {
   },
 
   _buildContract(filePath, fileName) {
-    const source = fs.read(filePath, 'utf-8')
+    const source = FileSystem.read(filePath, 'utf-8')
     return { fileName, filePath, source }
   },
 

@@ -71,6 +71,7 @@ export default class SolidityCompiler {
     if (!dependencyContract) dependencyContract = SolidityDependenciesFinder.call(dependencyPath)
     if (!dependencyContract) return { error: 'File not found' }
     log.info(`Compiling ${dependencyName} ...`)
+    compiler.contracts.push(dependencyContract)
     return { contents: dependencyContract.source }
   }
 
@@ -97,6 +98,7 @@ export default class SolidityCompiler {
   _buildContractData(solcOutput, fileName, contractName) {
     const output = solcOutput.contracts[fileName][contractName]
     const source = solcOutput.sources[fileName]
+    fileName = fileName.substring(fileName.lastIndexOf('/') + 1)
     const contract = this.contracts.find(contract => contract.fileName === fileName)
 
     return {
