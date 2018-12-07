@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import Contracts from "../utils/Contracts";
+import Contracts from "../artifacts/Contracts";
 
 /**
  * Returns a mapping from a derived contract in the inheritance chain,

@@ -1,7 +1,7 @@
 'use strict'
 
 import _ from 'lodash'
-import Contracts from "../utils/Contracts"
+import Contracts from "../artifacts/Contracts"
 
 export function hasInitialValuesInDeclarations(contractClass) {
   return detectInitialValues(contractClass)

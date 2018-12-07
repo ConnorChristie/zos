@@ -1,6 +1,6 @@
 import glob from 'glob'
 import path from 'path'
-import ContractFactory from '../artifacts/ContractFactory'
+import ContractFactory from './ContractFactory'
 
 const DEFAULT_SYNC_TIMEOUT = 240000
 const DEFAULT_BUILD_DIR = `${process.cwd()}/build/contracts`

@@ -1,6 +1,6 @@
 import Logger from '../utils/Logger'
 import { sendTransaction, deploy } from '../utils/Transactions'
-import Contracts from '../utils/Contracts';
+import Contracts from '../artifacts/Contracts';
 
 const log = new Logger('ImplementationDirectory')
 

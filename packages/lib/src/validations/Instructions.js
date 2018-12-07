@@ -1,4 +1,4 @@
-import Contracts from "../utils/Contracts";
+import Contracts from "../artifacts/Contracts";
 
 export function hasSelfDestruct(contractClass) {
   return hasTypeIdentifier(contractClass, "t_function_selfdestruct_nonpayable$_t_address_$returns$__$")
