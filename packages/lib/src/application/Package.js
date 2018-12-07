@@ -2,7 +2,7 @@ import _ from 'lodash';
 
 import Logger from '../utils/Logger'
 import { deploy as deployContract, sendTransaction } from '../utils/Transactions'
-import ImplementationDirectory from '../directory/ImplementationDirectory';
+import ImplementationDirectory from './ImplementationDirectory';
 import Contracts from '../artifacts/Contracts';
 import { toAddress, isZeroAddress } from '../utils/Addresses';
 import { toSemanticVersion } from '../utils/Semver';
