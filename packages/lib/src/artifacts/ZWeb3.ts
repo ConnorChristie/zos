@@ -22,13 +22,11 @@ export default class ZWeb3 {
 
   // TODO: this.web3 could be cached and initialized lazily?
   public static web3(): any {
-
     if (!ZWeb3.provider) {
       throw new Error('ZWeb3 must be initialized with a web3 provider');
     }
 
     const Web3 = require('web3');
-
     // TODO: improve provider validation for HttpProvider scenarios
     return (typeof ZWeb3.provider === 'string')
       ? new Web3.providers.HttpProvider(ZWeb3.provider)
@@ -127,8 +125,8 @@ export default class ZWeb3 {
     )(txHash);
   }
 
-  public static async getTransactionReceiptWithTimeout(tx: string, timeout: number): Promise<any> {
-    return ZWeb3._getTransactionReceiptWithTimeout(tx, timeout, new Date().getTime());
+  public static async getTransactionReceiptWithTimeout(tx: string, ms: number): Promise<any> {
+    return ZWeb3._getTransactionReceiptWithTimeout(tx, ms, new Date().getTime());
   }
 
   public static async isMainnet(): Promise<boolean> {
@@ -147,22 +145,15 @@ export default class ZWeb3 {
   }
 
   private static async _getTransactionReceiptWithTimeout(tx: string, timeout: number, startTime: number): Promise<any> | never {
-
     const receipt: any = await ZWeb3._tryGettingTransactionReceipt(tx);
-
     if (receipt) {
-      if (parseInt(receipt.status, 16) !== 0) {
-        return receipt;
-      }
+      if (parseInt(receipt.status, 16) !== 0) { return receipt; }
       throw new Error(`Transaction: ${tx} exited with an error (status 0).`);
     }
 
     await sleep(1000);
-
     const timeoutReached = timeout > 0 && new Date().getTime() - startTime > timeout;
-    if (!timeoutReached) {
-      return await ZWeb3._getTransactionReceiptWithTimeout(tx, timeout, startTime);
-    }
+    if (!timeoutReached) { return await ZWeb3._getTransactionReceiptWithTimeout(tx, timeout, startTime); }
     throw new Error(`Transaction ${tx} wasn't processed in ${timeout / 1000} seconds!`);
   }
 
