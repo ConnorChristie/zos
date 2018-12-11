@@ -103,7 +103,7 @@ export default class ZWeb3 {
     return (await ZWeb3.getLatestBlock()).number;
   }
 
-  public static async getStorageAt(address: string, position: number): Promise<string> {
+  public static async getStorageAt(address: string, position: string): Promise<string> {
     return promisify(
       ZWeb3.eth().getStorageAt.bind(ZWeb3.eth())
     )(address, position);
