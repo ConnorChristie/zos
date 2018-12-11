@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash'
 import verify from '../scripts/verify'
 import Initializer from '../models/initializer/Initializer'
 
@@ -14,17 +15,18 @@ const register = program => program
   .option('-o, --optimizer', 'enables optimizer option')
   .option('--optimizer-runs <runs>', 'specify number of runs if optimizer enabled.')
   .option('--remote <remote>', 'specify remote endpoint to use for verification')
-  .option('--api-key <key>', 'specify etherscan API key. To get one, go to: https://etherscancom.freshdesk.com/support/solutions/articles/35000022163-i-need-an-api-key')
+  .option('--api-key <key>', 'specify etherscan API key. To get one, go to: https://etherscan.io/myapikey')
   .action(action);
 
 
 async function action(contractAlias, options) {
-  const { optimizer, optimizerRuns } = options
+  const { optimizer, optimizerRuns, remote, apiKey } = options
   if (optimizer && !optimizerRuns) {
     throw new Error('Cannot verify contract without defining optimizer runs')
   }
-  const { network, txParams } = await Initializer.init(options)
-  await verify(contractAlias, { ...options, network, txParams })
+  const { network, txParams } = await Initializer.call(options)
+  const opts = _.pickBy({ optimizer, optimizerRuns, remote, apiKey, network, txParams })
+  await verify(contractAlias, { optimizer, optimizerRuns, remote, apiKey, network, txParams })
   if (!options.dontExitProcess && process.env.NODE_ENV !== 'test') process.exit(0)
 }
 
