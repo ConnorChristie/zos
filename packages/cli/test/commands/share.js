@@ -22,10 +22,9 @@ import * as setAdmin from '../../src/scripts/set-admin';
 
 import program from '../../src/bin/program';
 import Session from '../../src/models/network/Session';
+import Compiler from '../../src/models/compiler/Compiler';
 import ErrorHandler from '../../src/models/errors/ErrorHandler';
 import Initializer from '../../src/models/initializer/Initializer';
-
-const assert = require('chai').assert
 
 program.Command.prototype.parseReset = function() {
   var self = this
@@ -64,6 +63,7 @@ exports.stubCommands = function () {
     this.update = sinon.stub(update, 'default')
     this.verify = sinon.stub(verify, 'default')
     this.setAdmin = sinon.stub(setAdmin, 'default')
+    this.compiler = sinon.stub(Compiler.prototype, 'call').callsFake(() => null)
     this.errorHandler = sinon.stub(ErrorHandler.prototype, 'call').callsFake(() => null)
     this.initializer = sinon.stub(Initializer, 'initNetworkConfiguration').callsFake(function (options) {
       Initializer.initStaticConfiguration()
@@ -93,6 +93,7 @@ exports.stubCommands = function () {
     this.update.restore()
     this.verify.restore()
     this.setAdmin.restore()
+    this.compiler.restore()
     this.errorHandler.restore()
     this.initializer.restore()
     program.parseReset()

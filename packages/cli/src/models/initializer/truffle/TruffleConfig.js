@@ -15,6 +15,12 @@ const TruffleConfig = {
     }
   },
 
+  exists(root = process.cwd()) {
+    const truffleFile = `${root}/truffle.js`
+    const truffleConfigFile = `${root}/truffle-config.js`
+    return fs.exists(truffleFile) || !fs.exists(truffleConfigFile)
+  },
+
   buildDir() {
     const config = this.init()
     return config.contracts_build_directory
