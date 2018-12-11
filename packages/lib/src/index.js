@@ -20,7 +20,7 @@ import { semanticVersionEqual, toSemanticVersion, semanticVersionToString } from
 
 // validations
 import { getStorageLayout, getStructsOrEnums } from './validations/Storage';
-import { getBuildArtifacts } from './utils/BuildArtifacts';
+import { getBuildArtifacts } from './artifacts/BuildArtifacts';
 import { compareStorageLayouts } from './validations/Layout';
 import { validate, newValidationErrors, validationPasses } from './validations';
 
