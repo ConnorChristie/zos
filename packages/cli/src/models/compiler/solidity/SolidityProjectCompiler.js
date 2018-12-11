@@ -1,8 +1,8 @@
 import path from 'path'
 import { FileSystem as fs } from 'zos-lib'
-import SolidityCompiler from './SolidityCompiler'
+import SolidityContractsCompiler from './SolidityContractsCompiler'
 
-export default class ProjectCompiler {
+export default class SolidityProjectCompiler {
   constructor(input, output, options = {}) {
     this.inputDir = input
     this.outputDir = output
@@ -14,6 +14,7 @@ export default class ProjectCompiler {
   async call() {
     this._loadSoliditySourcesFromDir(this.inputDir)
     await this._compile()
+    this._writeOutput()
   }
 
   _loadSoliditySourcesFromDir(dir) {
@@ -29,8 +30,11 @@ export default class ProjectCompiler {
   }
 
   async _compile() {
-    const solidityCompiler = new SolidityCompiler(this.contracts, this.options)
+    const solidityCompiler = new SolidityContractsCompiler(this.contracts, this.options)
     this.compilerOutput = await solidityCompiler.call()
+  }
+
+  _writeOutput() {
     if (!fs.exists(this.outputDir)) fs.createDirPath(process.cwd(), this.outputDir)
     this.compilerOutput.forEach(data => {
       const buildFileName = `${this.outputDir}/${data.contractName}.json`

@@ -3,28 +3,50 @@ import axios from 'axios'
 import { Logger, FileSystem } from 'zos-lib'
 import SolidityDependenciesFinder from './SolidityDependenciesFinder'
 
-const log = new Logger('SolidityCompiler')
-const VERSIONS_URL = 'https://solc-bin.ethereum.org/bin/list.json'
+const log = new Logger('SolidityContractsCompiler')
 
-export default class SolidityCompiler {
+const VERSIONS_URL = 'https://solc-bin.ethereum.org/bin/list.json'
+const OUTPUT_SELECTION = {
+  '*': {
+    "": [
+      "legacyAST",
+      "ast"
+    ],
+    "*": [
+      "abi",
+      "evm.bytecode.object",
+      "evm.bytecode.sourceMap",
+      "evm.deployedBytecode.object",
+      "evm.deployedBytecode.sourceMap"
+    ]
+  }
+}
+
+export default class SolidityContractsCompiler {
   static latestVersion() {
     return solc.version()
   }
 
-  constructor(contracts, { version, optimizer }) {
+  constructor(contracts, { version, optimizer, evmVersion }) {
     this.errors = []
     this.contracts = contracts
     this.optimizer = optimizer
     this.version = version
+    this.evmVersion = evmVersion
+    this.settings = {
+      optimizer: this.optimizer,
+      evmVersion: this.evmVersion,
+      outputSelection: OUTPUT_SELECTION
+    }
   }
 
   async call() {
     const solcOutput = await this._compile()
-    return this._buildContractsData(solcOutput)
+    return this._buildContractsSchemas(solcOutput)
   }
 
   async solc() {
-    if (this.version === SolidityCompiler.latestVersion()) return solc
+    if (this.version === SolidityContractsCompiler.latestVersion()) return solc
     const version = await this._findVersion()
     const parsedVersion = version.replace('soljson-', '').replace('.js', '')
     return new Promise((resolve, reject) => {
@@ -41,7 +63,7 @@ export default class SolidityCompiler {
   }
 
   async _compile() {
-    const input = this._getCompilerInput()
+    const input = this._buildCompilerInput()
     const requestedSolc = await this.solc()
     const output = requestedSolc.compile(JSON.stringify(input), dep => this._findDependency(dep, this))
     const parsedOutput = JSON.parse(output)
@@ -57,10 +79,18 @@ export default class SolidityCompiler {
     if (errors.length > 0) throw Error(`Compilation errors: \n${errorMessages}`)
   }
 
+  _buildCompilerInput() {
+    return {
+      language: 'Solidity',
+      settings: this.settings,
+      sources: this._buildSources(),
+    }
+  }
+
   _buildSources() {
     return this.contracts.reduce((sources, contract) => {
       log.info(`Compiling ${contract.fileName} ...`)
-      sources[contract.fileName] = { content: contract.source }
+      sources[contract.filePath] = { content: contract.source }
       return sources
     }, {})
   }
@@ -72,7 +102,7 @@ export default class SolidityCompiler {
     if (!dependencyContract) return { error: 'File not found' }
     log.info(`Compiling ${dependencyName} ...`)
     compiler.contracts.push(dependencyContract)
-    return { contents: dependencyContract.source }
+    return { content: dependencyContract.source }
   }
 
   async _findVersion() {
@@ -87,15 +117,15 @@ export default class SolidityCompiler {
     throw Error(`Could not find version ${this.version} in ${VERSIONS_URL}`)
   }
 
-  _buildContractsData(solcOutput) {
+  _buildContractsSchemas(solcOutput) {
     return Object.keys(solcOutput.contracts).flatMap(fileName =>
       Object.keys(solcOutput.contracts[fileName]).map(contractName =>
-        this._buildContractData(solcOutput, fileName, contractName)
+        this._buildContractSchema(solcOutput, fileName, contractName)
       )
     )
   }
 
-  _buildContractData(solcOutput, fileName, contractName) {
+  _buildContractSchema(solcOutput, fileName, contractName) {
     const output = solcOutput.contracts[fileName][contractName]
     const source = solcOutput.sources[fileName]
     fileName = fileName.substring(fileName.lastIndexOf('/') + 1)
@@ -110,40 +140,38 @@ export default class SolidityCompiler {
       abi: output.abi,
       ast: source.ast,
       legacyAST: source.legacyAST,
-      bytecode: `0x${output.evm.bytecode.object}`,
-      deployedBytecode: `0x${output.evm.deployedBytecode.object}`,
+      bytecode: `0x${this._solveLibraryLinks(output.evm.bytecode)}`,
+      deployedBytecode: `0x${this._solveLibraryLinks(output.evm.deployedBytecode)}`,
       compiler: {
         'name': 'solc',
         'version': this.version,
-        'optimizer': this.optimizer
+        'optimizer': this.optimizer,
+        'evmVersion': this.evmVersion,
       }
     }
   }
 
-  _getCompilerInput() {
-    return {
-      language: 'Solidity',
-      sources: this._buildSources(),
-      settings: {
-        optimizer: {
-          enabled: this.optimizer
-        },
-        outputSelection: {
-          '*': {
-            "": [
-              "legacyAST",
-              "ast"
-            ],
-            "*": [
-              "abi",
-              "evm.bytecode.object",
-              "evm.bytecode.sourceMap",
-              "evm.deployedBytecode.object",
-              "evm.deployedBytecode.sourceMap"
-            ]
-          }
-        }
-      }
-    }
+  _solveLibraryLinks(outputBytecode) {
+    const librariesPaths = Object.keys(outputBytecode.linkReferences)
+    if (librariesPaths.length === 0) return outputBytecode.object
+    const links = librariesPaths.map(path => outputBytecode.linkReferences[path])
+    return links.reduce((replacedBytecode, link) => {
+      return Object.keys(link).reduce((subReplacedBytecode, libraryName) => {
+        const linkReferences = link[libraryName] || []
+        return this._replaceLinkReferences(subReplacedBytecode, linkReferences, libraryName)
+      }, replacedBytecode)
+    }, outputBytecode.object)
+  }
+
+
+  _replaceLinkReferences(bytecode, linkReferences, libraryName) {
+    // offset are given in bytes, we multiply it by 2 to work with character offsets
+    return linkReferences.reduce((bytecode, ref) => {
+      const start = ref.start * 2
+      const length = ref.length * 2
+      let linkId = `__${libraryName}`
+      linkId += '_'.repeat(length - linkId.length)
+      return bytecode.substring(0, start) + linkId + bytecode.substring(start + length)
+    }, bytecode)
   }
 }
