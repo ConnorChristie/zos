@@ -2,7 +2,7 @@
 process.env.NODE_ENV = 'test'
 
 import ZWeb3 from '../src/artifacts/ZWeb3'
-import Contracts from '../src/uWIP tils/Contracts'
+import Contracts from '../src/utils/Contracts'
 import { helpers } from '../src/test'
 
 ZWeb3.initialize(web3.currentProvider)
