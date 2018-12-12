@@ -93,8 +93,8 @@ async function _sendTransaction(contractFn, args = [], txParams = {}) {
   }
 
   // Estimate gas for the call
-  const estimateGasTxParams = { ... txParams, ... contractFn.request(...args).params[0] };
-  const gas = await estimateActualGas(estimateGasTxParams);
+  const estimatedGas = await contractFn.estimateGas(...args, txParams);
+  const gas = await calculateActualGas(estimatedGas);
   return contractFn(...args, { gas, ... txParams });
 }
 
