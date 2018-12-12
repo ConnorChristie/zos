@@ -1,14 +1,14 @@
-import * as fs from 'fs';
-import * as path from 'path';
+import fs from 'fs';
+import path from 'path';
 
 // TS-TODO: Analyze which of these functions could be encapsulated.
 
 export function read(filename: string): string {
-  return fs.readFileSync(filename, {encoding: 'utf8'});
+  return fs.readFileSync(filename, { encoding: 'utf8' });
 }
 
 export function readDir(dir: string): string[] {
-  return fs.readdirSync(dir, {encoding: 'utf8'});
+  return fs.readdirSync(dir, { encoding: 'utf8' });
 }
 
 export function exists(filename: string): boolean {
