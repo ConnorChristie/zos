@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FileSystem as fs, LibProject, Contracts, getSolidityLibNames, Logger } from 'zos-lib'
+import { FileSystem as fs, LibProject, Contracts, getSolidityLibNames, Logger } from 'cc-zos-lib'
 import semver from 'semver';
 import npm from 'npm-programmatic'
 

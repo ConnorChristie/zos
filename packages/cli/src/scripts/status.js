@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { Logger } from 'zos-lib';
+import { Logger } from 'cc-zos-lib';
 import ControllerFor from "../models/network/ControllerFor";
 
 const log = new Logger('scripts/status');

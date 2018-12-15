@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import NetworkBaseController from './NetworkBaseController';
-import { Contracts, Logger, AppProject, FileSystem as fs, Proxy, awaitConfirmations, hasBytecode, semanticVersionToString } from 'zos-lib';
+import { Contracts, Logger, AppProject, FileSystem as fs, Proxy, awaitConfirmations, hasBytecode, semanticVersionToString } from 'cc-zos-lib';
 import { toContractFullName } from '../../utils/naming';
 import Dependency from '../dependency/Dependency';
 import { allPromisesOrError } from '../../utils/async';

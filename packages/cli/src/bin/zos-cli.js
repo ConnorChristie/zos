@@ -1,6 +1,6 @@
 #! /usr/bin/env node
 
-import { Logger } from 'zos-lib'
+import { Logger } from 'cc-zos-lib'
 import { lockSync } from 'lockfile';
 import program from './program'
 

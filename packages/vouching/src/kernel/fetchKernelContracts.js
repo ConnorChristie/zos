@@ -1,4 +1,4 @@
-import { Contracts } from 'zos-lib'
+import { Contracts } from 'cc-zos-lib'
 import validateAddress from '../helpers/validateAddress'
 
 export function fetchJurisdiction(networkFile) {

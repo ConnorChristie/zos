@@ -25,7 +25,7 @@ Next, we need the App contract of the [`ZeppelinOS Library`](https://github.com/
 This contract will live in the blockchain and manage the different versions of our smart contracts.
 
 ```js
-const { App } = require('zos-lib')
+const { App } = require('cc-zos-lib')
 const initialVersion = '0.0.1'
 await App.deploy(initialVersion)
 ```

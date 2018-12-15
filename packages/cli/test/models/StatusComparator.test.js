@@ -1,7 +1,7 @@
 'use strict'
 require('../setup')
 
-import { Contracts, getStorageLayout, bytecodeDigest } from 'zos-lib'
+import { Contracts, getStorageLayout, bytecodeDigest } from 'cc-zos-lib'
 
 import push from '../../src/scripts/push'
 import link from '../../src/scripts/link'

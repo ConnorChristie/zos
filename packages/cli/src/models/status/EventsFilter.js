@@ -1,4 +1,4 @@
-import { Logger } from 'zos-lib'
+import { Logger } from 'cc-zos-lib'
 
 const log = new Logger('EventsFilter')
 const TIMEOUT_ERROR = 'Event filter promise timed out'

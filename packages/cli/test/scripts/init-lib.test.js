@@ -1,7 +1,7 @@
 'use strict'
 require('../setup')
 
-import { FileSystem as fs } from 'zos-lib'
+import { FileSystem as fs } from 'cc-zos-lib'
 import { cleanup, cleanupfn } from '../helpers/cleanup'
 
 import initLib from '../../src/scripts/init-lib.js'

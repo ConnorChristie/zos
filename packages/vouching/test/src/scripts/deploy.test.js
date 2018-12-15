@@ -1,4 +1,4 @@
-import { FileSystem as fs } from 'zos-lib'
+import { FileSystem as fs } from 'cc-zos-lib'
 import log from '../../../src/helpers/log'
 import deploy from '../../../src/scripts/deploy'
 import ZosPackageFile from 'zos/lib/models/files/ZosPackageFile'

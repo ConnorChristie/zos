@@ -1,5 +1,5 @@
 import _ from 'lodash';
-import { FileSystem as fs, Logger, getStorageLayout } from 'zos-lib';
+import { FileSystem as fs, Logger, getStorageLayout } from 'cc-zos-lib';
 
 const log = new Logger('Validations');
 const safetyChecksLink = "Read more at https://docs.zeppelinos.org/docs/advanced.html#safety-checks";

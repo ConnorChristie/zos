@@ -1,5 +1,5 @@
 import _ from 'lodash'
-import { Logger, FileSystem as fs, bytecodeDigest, bodyCode, constructorCode, semanticVersionToString } from 'zos-lib'
+import { Logger, FileSystem as fs, bytecodeDigest, bodyCode, constructorCode, semanticVersionToString } from 'cc-zos-lib'
 import { fromContractFullName, toContractFullName } from '../../utils/naming';
 import { ZOS_VERSION, checkVersion } from './ZosVersion';
 

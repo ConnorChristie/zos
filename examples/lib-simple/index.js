@@ -4,7 +4,7 @@
 global.artifacts = artifacts;
 global.web3 = web3;
 
-const { Contracts, SimpleProject  } = require('zos-lib')
+const { Contracts, SimpleProject  } = require('cc-zos-lib')
 const MyContract_v0 = Contracts.getFromLocal('MyContract_v0');
 const MyContract_v1 = Contracts.getFromLocal('MyContract_v1');
 

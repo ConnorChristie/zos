@@ -1,7 +1,7 @@
 'use strict'
 require('../setup')
 
-import { Logger } from 'zos-lib';
+import { Logger } from 'cc-zos-lib';
 import CaptureLogs from '../helpers/captureLogs';
 
 import add from '../../src/scripts/add.js';

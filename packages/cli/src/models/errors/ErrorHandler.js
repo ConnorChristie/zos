@@ -1,4 +1,4 @@
-import { Logger } from 'zos-lib'
+import { Logger } from 'cc-zos-lib'
 
 const log = new Logger('Error')
 const GENERIC_ERROR_MESSAGE = 'There was an undefined error. Please execute the same command again in verbose mode if necessary.'

@@ -2,7 +2,7 @@
 require('../setup')
 
 import CaptureLogs from '../helpers/captureLogs';
-import { Contracts, getStorageLayout, compareStorageLayouts, getBuildArtifacts } from 'zos-lib';
+import { Contracts, getStorageLayout, compareStorageLayouts, getBuildArtifacts } from 'cc-zos-lib';
 import ValidationLogger from '../../src/interface/ValidationLogger';
 
 contract('ValidationLogger', function() {

@@ -1,4 +1,4 @@
-import { Logger } from 'zos-lib';
+import { Logger } from 'cc-zos-lib';
 
 export default class CaptureLogs {
   constructor() {

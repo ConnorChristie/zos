@@ -98,7 +98,7 @@ async unsetDependency(name)
 
 This way, creating an upgradeable instance would be done with the following code:
 ```js
-const Project = require('zos-lib').Project
+const Project = require('cc-zos-lib').Project
 const project = new Project()
 const MyContract = artifacts.require("MyContract")
 const myInstance = project.createProxy(MyContract, { initMethod: 'initialize', initArgs: [42] })

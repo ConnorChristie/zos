@@ -1,7 +1,7 @@
 'use strict'
 require('../setup')
 
-import { Package } from 'zos-lib'
+import { Package } from 'cc-zos-lib'
 import push from '../../src/scripts/push.js'
 import freeze from '../../src/scripts/freeze.js'
 import ZosPackageFile from '../../src/models/files/ZosPackageFile'

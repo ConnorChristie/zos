@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import Session from '../network/Session'
 import Truffle from '../truffle/Truffle'
-import { Contracts, Logger, FileSystem as fs, getBuildArtifacts, validate as validateContract, validationPasses} from 'zos-lib'
+import { Contracts, Logger, FileSystem as fs, getBuildArtifacts, validate as validateContract, validationPasses} from 'cc-zos-lib'
 import Dependency from '../dependency/Dependency';
 import ValidationLogger from '../../interface/ValidationLogger';
 

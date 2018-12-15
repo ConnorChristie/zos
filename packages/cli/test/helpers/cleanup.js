@@ -1,4 +1,4 @@
-import { FileSystem as fs } from 'zos-lib'
+import { FileSystem as fs } from 'cc-zos-lib'
 
 export function cleanup(path) {
   try {

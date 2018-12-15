@@ -1,4 +1,4 @@
-import { assertRevert } from 'zos-lib'
+import { assertRevert } from 'cc-zos-lib'
 import getBalance from '../helpers/getBalance.js'
 
 export default function(owner, donor, wallet) {

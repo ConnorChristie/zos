@@ -44,7 +44,7 @@ node
 > var Web3 = require('web3')
 > web3 = new Web3(new Web3.providers.HttpProvider("http://localhost:9545"))
 > // Load the contract.
-> const { Contracts, SimpleProject } = require('zos-lib')
+> const { Contracts, SimpleProject } = require('cc-zos-lib')
 > const MyContract = Contracts.getFromLocal('MyContract')
 > // Instantiate a project.
 > myProject = new SimpleProject('MyProject', { from: web3.eth.accounts[0] });

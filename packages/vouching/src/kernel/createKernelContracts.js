@@ -1,6 +1,6 @@
 import log from '../helpers/log'
 import { files, scripts } from 'zos'
-import { Contracts, ABI } from 'zos-lib'
+import { Contracts, ABI } from 'cc-zos-lib'
 import { ZEPTOKEN_ATTRIBUTE_ID, VOUCHING_MIN_STAKE } from '../constants'
 import { fetchJurisdiction, fetchValidator, fetchVouching, fetchZepToken } from './fetchKernelContracts'
 import { printJurisdictionInformation, printVouchingInformation, printZepTokenInformation, printOrganizationsValidatorInformation } from './printKernelInformation'

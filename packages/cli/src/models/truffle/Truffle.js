@@ -1,5 +1,5 @@
 import path from 'path'
-import { Logger, FileSystem as fs } from 'zos-lib'
+import { Logger, FileSystem as fs } from 'cc-zos-lib'
 import { promisify } from 'util'
 
 const log = new Logger('Truffle')

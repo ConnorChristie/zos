@@ -1,7 +1,7 @@
 'use strict'
 require('../setup')
 
-import { App, Package, ImplementationDirectory, Proxy } from 'zos-lib'
+import { App, Package, ImplementationDirectory, Proxy } from 'cc-zos-lib'
 
 import publish from '../../src/scripts/publish.js';
 import push from '../../src/scripts/push.js';

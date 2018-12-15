@@ -1,7 +1,7 @@
 import querystring from 'querystring'
 import axios from 'axios'
 import cheerio from 'cheerio'
-import { Logger } from 'zos-lib'
+import { Logger } from 'cc-zos-lib'
 
 const log = new Logger('Verifier')
 

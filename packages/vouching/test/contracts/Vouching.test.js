@@ -1,4 +1,4 @@
-import { Contracts, encodeCall, assertEvent, assertRevert } from 'zos-lib'
+import { Contracts, encodeCall, assertEvent, assertRevert } from 'cc-zos-lib'
 
 const BigNumber = web3.BigNumber;
 const ZEPToken = artifacts.require('ZEPToken');

@@ -1,4 +1,4 @@
-import { Logger } from 'zos-lib'
+import { Logger } from 'cc-zos-lib'
 import StatusReport from './StatusReport'
 
 const log = new Logger('StatusComparator')

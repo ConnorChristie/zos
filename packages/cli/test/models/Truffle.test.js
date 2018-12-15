@@ -1,7 +1,7 @@
 'use strict'
 require('../setup')
 
-import { FileSystem as fs } from 'zos-lib'
+import { FileSystem as fs } from 'cc-zos-lib'
 import { cleanupfn } from '../helpers/cleanup'
 import Truffle from '../../src/models/truffle/Truffle'
 

@@ -1,6 +1,6 @@
 import _ from 'lodash'
 import ZosNetworkFile from './ZosNetworkFile'
-import { Logger, FileSystem as fs } from 'zos-lib'
+import { Logger, FileSystem as fs } from 'cc-zos-lib'
 import Dependency from '../dependency/Dependency';
 import { ZOS_VERSION, checkVersion } from './ZosVersion';
 

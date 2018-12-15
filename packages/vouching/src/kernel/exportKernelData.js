@@ -1,4 +1,4 @@
-import { FileSystem as fs } from 'zos-lib'
+import { FileSystem as fs } from 'cc-zos-lib'
 
 export default function exportKernelData(outputFile, app, jurisdiction, zepToken, validator, vouching) {
   fs.writeJson(outputFile, {

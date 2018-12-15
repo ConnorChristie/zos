@@ -1,4 +1,4 @@
-import { FileSystem as fs, Logger } from 'zos-lib'
+import { FileSystem as fs, Logger } from 'cc-zos-lib'
 import _ from 'lodash'
 
 const log = new Logger('Session')

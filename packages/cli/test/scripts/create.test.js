@@ -2,7 +2,7 @@
 require('../setup')
 
 import CaptureLogs from '../helpers/captureLogs';
-import { Contracts, Logger } from 'zos-lib';
+import { Contracts, Logger } from 'cc-zos-lib';
 
 import add from '../../src/scripts/add.js';
 import push from '../../src/scripts/push.js';

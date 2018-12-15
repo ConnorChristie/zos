@@ -1,7 +1,7 @@
 import _ from 'lodash'
 import { promisify } from 'util'
 
-import { Logger, LibProject, AppProject, bytecodeDigest, semanticVersionEqual, replaceSolidityLibAddress, isSolidityLib } from 'zos-lib'
+import { Logger, LibProject, AppProject, bytecodeDigest, semanticVersionEqual, replaceSolidityLibAddress, isSolidityLib } from 'cc-zos-lib'
 import EventsFilter from './EventsFilter'
 import StatusFetcher from './StatusFetcher'
 import StatusComparator from './StatusComparator'

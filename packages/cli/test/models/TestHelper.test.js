@@ -2,7 +2,7 @@
 
 require('../setup')
 
-import { Contracts } from 'zos-lib'
+import { Contracts } from 'cc-zos-lib'
 import TestHelper from '../../src/models/TestHelper'
 import ZosPackageFile from "../../src/models/files/ZosPackageFile"
 

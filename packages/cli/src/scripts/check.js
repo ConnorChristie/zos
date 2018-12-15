@@ -1,5 +1,5 @@
 import ControllerFor from '../models/local/ControllerFor';
-import { Logger } from 'zos-lib';
+import { Logger } from 'cc-zos-lib';
 
 const log = new Logger('Check');
 

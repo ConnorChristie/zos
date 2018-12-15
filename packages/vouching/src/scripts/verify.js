@@ -1,6 +1,6 @@
 import log from '../helpers/log'
 import { files } from 'zos'
-import { FileSystem as fs, Semver, Contracts } from 'zos-lib'
+import { FileSystem as fs, Semver, Contracts } from 'cc-zos-lib'
 import { fetchJurisdiction, fetchValidator, fetchVouching, fetchZepToken } from '../kernel/fetchKernelContracts'
 import validateAddress from '../helpers/validateAddress'
 import {

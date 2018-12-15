@@ -1,7 +1,7 @@
 'use strict'
 require('./setup')
 
-import { Contracts, encodeCall } from 'zos-lib'
+import { Contracts, encodeCall } from 'cc-zos-lib'
 import shouldBehaveLikeDonations from './behaviors/Donations.behavior.js'
 
 const sendTransaction = (target, method, args, values, opts) => {

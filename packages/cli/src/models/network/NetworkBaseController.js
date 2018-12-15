@@ -1,6 +1,6 @@
 import _ from 'lodash';
-import { Contracts, Logger, flattenSourceCode, getStorageLayout, getBuildArtifacts, getSolidityLibNames } from 'zos-lib';
-import { validate, newValidationErrors, validationPasses } from 'zos-lib';
+import { Contracts, Logger, flattenSourceCode, getStorageLayout, getBuildArtifacts, getSolidityLibNames } from 'cc-zos-lib';
+import { validate, newValidationErrors, validationPasses } from 'cc-zos-lib';
 import StatusChecker from "../status/StatusChecker";
 import Verifier from '../Verifier'
 import { allPromisesOrError } from '../../utils/async';

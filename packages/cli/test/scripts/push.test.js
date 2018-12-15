@@ -3,7 +3,7 @@ require('../setup')
 
 import sinon from 'sinon'
 
-import { Contracts, App, Package } from 'zos-lib'
+import { Contracts, App, Package } from 'cc-zos-lib'
 
 import push from '../../src/scripts/push.js';
 import freeze from '../../src/scripts/freeze';

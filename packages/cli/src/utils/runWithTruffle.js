@@ -1,6 +1,6 @@
 import Truffle from '../models/truffle/Truffle';
 import Session from '../models/network/Session'
-import { Contracts } from 'zos-lib';
+import { Contracts } from 'cc-zos-lib';
 import _ from 'lodash';
 
 const DEFAULT_TIMEOUT = 10 * 60; // 10 minutes
