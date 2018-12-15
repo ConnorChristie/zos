@@ -1,5 +1,5 @@
 {
-  "name": "zos-docs",
+  "name": "cc-zos-docs",
   "version": "2.1.0",
   "description": "Documentation for the ZeppelinOS smart contract platform",
   "main": "index.js",
