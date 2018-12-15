@@ -2,7 +2,7 @@
 require('../setup')
 
 import _ from 'lodash';
-import { Contracts, AppProject, Proxy } from "zos-lib";
+import { Contracts, AppProject, Proxy } from "cc-zos-lib";
 import CaptureLogs from '../helpers/captureLogs';
 
 import add from '../../src/scripts/add.js';

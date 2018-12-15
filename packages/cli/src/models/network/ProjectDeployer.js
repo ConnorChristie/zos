@@ -1,4 +1,4 @@
-import { AppProject, LibProject, SimpleProject } from "zos-lib";
+import { AppProject, LibProject, SimpleProject } from "cc-zos-lib";
 import _ from 'lodash';
 
 class BaseProjectDeployer {

@@ -1,7 +1,7 @@
 'use strict'
 require('../setup')
 
-import { Proxy } from "zos-lib";
+import { Proxy } from "cc-zos-lib";
 
 import push from '../../src/scripts/push.js';
 import createProxy from '../../src/scripts/create.js';
